@@ -10,7 +10,7 @@ contract Compound {
     IERC20 usdc;
     CTokenInterface cUsdc;
     ComptrollerInterface comptroller;
-    address _dai = 0x6A9865aDE2B6207dAAC49f8bCba9705dEB0B0e6D;
+    address _dai = 0x5592EC0cfb4dbc12D3aB100b257153436a1f0FEa;
     address _cDai = 0x6D7F0754FFeb405d23C51CE938289d4835bE3b14;
     address _usdc = 0x4DBCdF9B62e891a7cec5A2568C3F4FAF9E8Abe2b;
     address _cUsdc = 0x5B281A6DdA0B271e91ae35DE655Ad301C976edb1;
@@ -22,6 +22,10 @@ contract Compound {
         usdc = IERC20(_usdc);
         cUsdc = CTokenInterface(_cUsdc);
         comptroller = ComptrollerInterface(_comptroller);
+    }
+
+    function approveContract(uint amount) public {
+      dai.approve(address(this), amount);
     }
 
     function deposit(uint _amount) public {
@@ -50,10 +54,10 @@ contract Compound {
         cUsdc.repayBorrow(_amount);
     }
     function getCDaiBalance() public view returns(uint) {
-        return cDai.balanceOf(address(this));
+        return cDai.balanceOf(msg.sender);
     }
-    function getCUSDCBalance() public view returns(uint) {
-        return cUsdc.balanceOf(address(this));
+    function getCDaiContractBalance() public view returns(uint) {
+        return cDai.balanceOf(address(this));
     }
       function getInfo() external returns (uint exchangeRate, uint supplyRate) {
     // Amount of current exchange rate from cToken to underlying
@@ -62,6 +66,5 @@ contract Compound {
     supplyRate = cDai.supplyRatePerBlock();
   }
 
-  
 
 }
