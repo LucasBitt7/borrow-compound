@@ -10,8 +10,9 @@ contract Compound {
     IERC20 usdc;
     CTokenInterface cUsdc;
     ComptrollerInterface comptroller;
-    address _dai = 0x5592EC0cfb4dbc12D3aB100b257153436a1f0FEa;
-    address _cDai = 0x6D7F0754FFeb405d23C51CE938289d4835bE3b14;
+    ////////RINKEBY ADDRESSES////////////
+    address _dai = 0xD9BA894E0097f8cC2BBc9D24D308b98e36dc6D02;//usdt address
+    address _cDai = 0x2fB298BDbeF468638AD6653FF8376575ea41e768;///logo vai ser cUSDT
     address _usdc = 0x4DBCdF9B62e891a7cec5A2568C3F4FAF9E8Abe2b;
     address _cUsdc = 0x5B281A6DdA0B271e91ae35DE655Ad301C976edb1;
     address _comptroller = 0x2EAa9D77AE4D8f9cdD9FAAcd44016E746485bddb;
@@ -22,10 +23,6 @@ contract Compound {
         usdc = IERC20(_usdc);
         cUsdc = CTokenInterface(_cUsdc);
         comptroller = ComptrollerInterface(_comptroller);
-    }
-
-    function approveContract(uint amount) public {
-      dai.approve(address(this), amount);
     }
 
     function deposit(uint _amount) public {
@@ -65,6 +62,4 @@ contract Compound {
     // Amount added to you supply balance this block
     supplyRate = cDai.supplyRatePerBlock();
   }
-
-
 }
