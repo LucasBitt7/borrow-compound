@@ -57,16 +57,11 @@ contract Compound {
     }
       function getInfo() external returns (uint exchangeRate, uint supplyRate) {
     // Amount of current exchange rate from cToken to underlying
-    exchangeRate = _cDai.exchangeRateCurrent();
+    exchangeRate = cDai.exchangeRateCurrent();
     // Amount added to you supply balance this block
-    supplyRate = _cDai.supplyRatePerBlock();
+    supplyRate = cDai.supplyRatePerBlock();
   }
-    function getCollateralFactor() external view returns (uint) {
-    (bool isListed, uint colFactor, bool isComped) = comptroller.markets(
-      address(cToken)
-    );
-    return colFactor; // divide by 1e18 to get in %
-  }
+
   
 
 }
